@@ -1,29 +1,27 @@
 package gowoTests.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import gowoTests.helpers.HelpMethods;
+import groovyjarjarpicocli.CommandLine;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class MainPage {
+    protected HelpMethods helpMethods = new HelpMethods();
     private SelenideElement
-            authTabeTitle = $("#login .mat-card-title.mb-2"),
-            authEmailField = $("#mat-input-0"),
-            authPasswordField = $("#mat-input-0"),
-            authEnterButton = $("#login .mat-focus-indicator.mat-accent"),
-            vipUsersTextLocator = $x("//h3[text() = 'VIP пользователи']");
+            enterLinkLocator = $x("//a[text() = 'Вход']");
 
-    public void doAuthUi(String login, String password) {
-        authEmailField.setValue(login);
-        authPasswordField.setValue(password);
-        authEnterButton.click();
+    public SelenideElement getEnterLinkLocator() {
+        return enterLinkLocator;
     }
 
-    public SelenideElement getAuthTabeTitle() {
-        return authTabeTitle;
-    }
-
-    public SelenideElement getVipUsersTextLocator() {
-        return vipUsersTextLocator;
+    /**
+     * метод клика на кнопку входа
+     * @return
+     */
+    public EnterModalWindow clickEnterLink() {
+        helpMethods.clickButtonByLocator(enterLinkLocator);
+        return new EnterModalWindow();
     }
 }
