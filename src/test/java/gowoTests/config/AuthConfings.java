@@ -3,7 +3,7 @@ package gowoTests.config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:data.properties"
+        "classpath:auth.properties"
 })
 public interface AuthConfings extends Config {
     @Key("login")
@@ -12,7 +12,6 @@ public interface AuthConfings extends Config {
     String getPassword();
     @Key("apiAuthPath")
     String getApiAuthPath();
-
     @Key("baseUrl")
     String getBaseUrl();
 }

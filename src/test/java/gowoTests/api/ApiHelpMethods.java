@@ -1,15 +1,16 @@
 package gowoTests.api;
 
-import gowoTests.api.pojo.AuthRequest;
+import gowoTests.api.pojo.requests.AuthRequest;
+import gowoTests.api.pojo.responses.AuthResponse;
 import gowoTests.config.AuthConfings;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
 public class ApiHelpMethods {
-    private AuthConfings config = ConfigFactory.create(AuthConfings.class, System.getProperties());
+    protected AuthConfings config = ConfigFactory.create(AuthConfings.class, System.getProperties());
+    protected final String authCookieName = "ssr_token";
 
     /**
      * метод  получения токена авторизации через апи.
@@ -22,13 +23,22 @@ public class ApiHelpMethods {
     public String authWithApi(String login, String password) {
         Spec.install(config.getApiAuthPath(), HttpStatus.SC_OK);
         AuthRequest body = new AuthRequest(login, password);
-        return
+        AuthResponse response =
                 RestAssured
                         .given()
                         .body(body)
                         .when()
                         .post()
                         .then().log().all()
-                        .extract().path("data.token");
+                        .extract().as(AuthResponse.class);
+        return response.getData().getToken().replace(" ", "%20");
+    }
+
+    @Test
+    void test(){
+//        String s = authWithApi(config.getLogin(),config.getPassword());
+        String a = "Basic%MTA";
+        String s = a.replace("%","%20");
+        System.out.println(s);
     }
 }

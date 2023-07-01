@@ -9,6 +9,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.aeonbits.owner.ConfigFactory;
 
+
 public class Spec {
     private static AuthConfings config = ConfigFactory.create(AuthConfings.class, System.getProperties());
 
