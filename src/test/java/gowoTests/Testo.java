@@ -6,6 +6,8 @@ import gowoTests.api.ApiHelpMethods;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Cookie;
 
+import java.util.Random;
+
 import static com.codeborne.selenide.Selenide.$;
 
 public class Testo extends TestBase {
@@ -26,7 +28,7 @@ public class Testo extends TestBase {
 
     @Test
     void t() {
-login.doLoginInUiUsingApi(config.getLogin(),config.getPassword());
+
 int a = 5;
 
     }

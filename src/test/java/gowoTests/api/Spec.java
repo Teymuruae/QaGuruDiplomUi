@@ -15,8 +15,7 @@ public class Spec {
 
     private static RequestSpecification request(String path) {
         return new RequestSpecBuilder()
-                .setBaseUri(config.getBaseUrl())
-                .setBasePath(path)
+                .setBaseUri(config.getApiAuthUrl())
                 .setContentType(ContentType.JSON)
                 .build();
     }

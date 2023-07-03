@@ -10,19 +10,18 @@ import org.junit.jupiter.api.Test;
 
 public class ApiHelpMethods {
     protected AuthConfings config = ConfigFactory.create(AuthConfings.class, System.getProperties());
-    protected final String authCookieName = "ssr_token";
+    protected final String authCookieName = "tokenp_";
 
     /**
      * метод  получения токена авторизации через апи.
      * На вход передаются логин и пароль
      *
-     * @param login
-     * @param password
+     * @param token
      * @return
      */
-    public String authWithApi(String login, String password) {
-        Spec.install(config.getApiAuthPath(), HttpStatus.SC_OK);
-        AuthRequest body = new AuthRequest(login, password);
+    public String authWithApi(String token) {
+        Spec.install(config.getApiAuthUrl(), HttpStatus.SC_OK);
+        AuthRequest body = new AuthRequest(token);
         AuthResponse response =
                 RestAssured
                         .given()
@@ -31,14 +30,12 @@ public class ApiHelpMethods {
                         .post()
                         .then().log().all()
                         .extract().as(AuthResponse.class);
-        return response.getData().getToken().replace(" ", "%20");
+        return response.getItem().getToken();
     }
 
     @Test
-    void test(){
-//        String s = authWithApi(config.getLogin(),config.getPassword());
-        String a = "Basic%MTA";
-        String s = a.replace("%","%20");
+    void test() {
+        String s = authWithApi(config.getToken());
         System.out.println(s);
     }
 }

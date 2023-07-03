@@ -1,19 +1,17 @@
 package gowoTests.api.pojo.requests;
 
 public class AuthRequest {
-    private String emailOrPhone;
-    private String password;
 
-    public AuthRequest(String emailOrPhone, String password) {
-        this.emailOrPhone = emailOrPhone;
-        this.password = password;
+    private String token;
+
+    public AuthRequest(String token) {
+        this.token = token;
     }
 
-    public String getEmailOrPhone() {
-        return emailOrPhone;
+    public AuthRequest() {
     }
 
-    public String getPassword() {
-        return password;
+    public String getToken() {
+        return token;
     }
 }

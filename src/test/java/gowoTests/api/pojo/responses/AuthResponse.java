@@ -1,25 +1,20 @@
 package gowoTests.api.pojo.responses;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AuthResponse {
 
-        private AuthResponseData data;
-        private ArrayList<Object> pagination;
+            @JsonProperty("Item")
+    private Item item;
 
-    public AuthResponse(AuthResponseData data, ArrayList<Object> pagination) {
-        this.data = data;
-        this.pagination = pagination;
+    public AuthResponse(Item item) {
+        this.item = item;
     }
 
     public AuthResponse() {
     }
 
-    public AuthResponseData getData() {
-        return data;
-    }
-
-    public ArrayList<Object> getPagination() {
-        return pagination;
+    public Item getItem() {
+        return item;
     }
 }

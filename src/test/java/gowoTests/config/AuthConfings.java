@@ -6,12 +6,16 @@ import org.aeonbits.owner.Config;
         "classpath:auth.properties"
 })
 public interface AuthConfings extends Config {
-    @Key("login")
-    String getLogin();
-    @Key("password")
-    String getPassword();
-    @Key("apiAuthPath")
-    String getApiAuthPath();
+    @Key("token")
+    String getToken();
+    @Key("apiAuthUrl")
+    String getApiAuthUrl();
     @Key("baseUrl")
     String getBaseUrl();
+
+    @Key("username")
+    String getUsername();
+
+    @Key("password")
+    String getPassword();
 }

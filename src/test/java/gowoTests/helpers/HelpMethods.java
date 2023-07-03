@@ -6,17 +6,27 @@ import com.codeborne.selenide.SelenideElement;
 public class HelpMethods {
 
     /**
-     * метод клика по кнопке по локатору
+     * метод клика на кнопку
+     *
      * @param element
      */
-    public HelpMethods clickButtonByLocator(SelenideElement element){
-        element.shouldBe(Condition.visible).click();
+    public HelpMethods clickButton(SelenideElement element) {
+        element
+                .shouldBe(Condition.visible)
+                .shouldBe(Condition.enabled)
+                .click();
         return this;
     }
 
-    public HelpMethods setValueByLocator(SelenideElement element, String valueToSet){
+    /**
+     * метод заполнения поля по локатору
+     *
+     * @param element
+     * @param textToSet
+     */
+    public HelpMethods fillForm(SelenideElement element, String textToSet) {
         element.clear();
-        element.setValue(valueToSet);
+        element.shouldBe(Condition.visible).setValue(textToSet);
         return this;
     }
 }
