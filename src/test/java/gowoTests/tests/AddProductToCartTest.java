@@ -15,6 +15,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static io.qameta.allure.Allure.step;
+
 public class AddProductToCartTest extends TestBase {
     private static MainPage mainPage = new MainPage();
     private ProductPage productPage = new ProductPage();
@@ -32,21 +34,30 @@ public class AddProductToCartTest extends TestBase {
     @MethodSource()
     @ParameterizedTest()
     void addProductToCartTest(SelenideElement element) {
-        Selenide.open("/");
-        helpMethods
-                .clickButton(mainPage.getHomeButtonLocator())
-                .clickButton(element);
-        Selenide.sleep(1000);
-        String chosenProduct = mainPage.clickProduct();
-        helpMethods
-                .clickButton(productPage.getAddToCartButtonLocator());
-        Selenide.confirm();
-        helpMethods
-                .clickButton(mainPage.getCartButtonLocator());
-        Selenide.sleep(1000);
-        List<String> productsList = cartPage.getProductsTitle().texts();
-        System.out.println(chosenProduct);
-        System.out.println(productsList);
-        Assertions.assertTrue(productsList.contains(chosenProduct));
+        step("Переход на сайт", () -> {
+            Selenide.open("/");
+        });
+        String chosenProduct =
+                step("Выбор товара на главной странице", () -> {
+                    helpMethods
+                            .clickButton(mainPage.getHomeButtonLocator())
+                            .clickButton(element);
+                    Selenide.sleep(1000);
+                    return mainPage.clickProduct();
+                });
+        step("Добавление товара в корзину", () -> {
+            helpMethods
+                    .clickButton(productPage.getAddToCartButtonLocator());
+            Selenide.confirm();
+        });
+        step("Переход в корзину", () -> {
+            helpMethods
+                    .clickButton(mainPage.getCartButtonLocator());
+            Selenide.sleep(1000);
+        });
+        step("Проверка наличия товара в корзине", () -> {
+            List<String> productsList = cartPage.getProductsTitle().texts();
+            Assertions.assertTrue(productsList.contains(chosenProduct));
+        });
     }
 }

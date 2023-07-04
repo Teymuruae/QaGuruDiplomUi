@@ -7,6 +7,8 @@ import gowoTests.pages.LoginForm;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static io.qameta.allure.Allure.step;
+
 public class AuthUiPositiveTest extends TestBase {
 
     private LoginForm loginForm = new LoginForm();
@@ -14,9 +16,15 @@ public class AuthUiPositiveTest extends TestBase {
     @DisplayName("Позитивный тест на авторизацию ui")
     @Test
     void authPositiveTest() {
-        Selenide.open("/");
-        loginForm.doLogin(config.getUsername(), config.getPassword());
-        loginForm.getNameOfUserLink().shouldBe(Condition.visible);
-        loginForm.getLoginButtonLocator().shouldNotBe(Condition.visible);
+        step("Переход на сайт", () -> {
+            Selenide.open("/");
+        });
+        step("Авторизация", () -> {
+            loginForm.doLogin(authConfings.getUsername(), authConfings.getPassword());
+        });
+        step("Проверка авторизации", () -> {
+            loginForm.getNameOfUserLink().shouldBe(Condition.visible);
+            loginForm.getLoginButtonLocator().shouldNotBe(Condition.visible);
+        });
     }
 }

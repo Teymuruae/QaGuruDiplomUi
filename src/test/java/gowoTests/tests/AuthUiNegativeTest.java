@@ -13,6 +13,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static io.qameta.allure.Allure.step;
+
 public class AuthUiNegativeTest extends TestBase {
 
     private static LoginForm loginForm = new LoginForm();
@@ -20,9 +22,9 @@ public class AuthUiNegativeTest extends TestBase {
     static Stream<Arguments> authNegativeTest() {
         return Stream.of(
                 Arguments.of(FakeData.fakeUser, FakeData.fakePassword, loginForm.getWrongUserALertText()),
-                Arguments.of(config.getUsername(), FakeData.fakePassword, loginForm.getWrongPasswordAletText()),
+                Arguments.of(authConfings.getUsername(), FakeData.fakePassword, loginForm.getWrongPasswordAletText()),
                 Arguments.of("", FakeData.fakePassword, loginForm.getEmptyFieldAlertText()),
-                Arguments.of(config.getUsername(), "", loginForm.getEmptyFieldAlertText()),
+                Arguments.of(authConfings.getUsername(), "", loginForm.getEmptyFieldAlertText()),
                 Arguments.of("", "", loginForm.getEmptyFieldAlertText())
         );
     }
@@ -31,13 +33,21 @@ public class AuthUiNegativeTest extends TestBase {
     @MethodSource()
     @ParameterizedTest(name = "name {0}, pass {1}, {2}")
     void authNegativeTest(String username, String password, String alertExpectedText) {
-        Selenide.open("/");
-        loginForm.doLogin(username, password);
-        String alertActualText = Selenide.switchTo().alert().getText();
-        Selenide.confirm();
-        loginForm.getCloseModalButton();
-        Assertions.assertEquals(alertExpectedText, alertActualText);
-        loginForm.getLoginButtonLocator().shouldBe(Condition.visible);
-        loginForm.getNameOfUserLink().shouldNotBe(Condition.visible);
+        step("Переход на сайт", () -> {
+            Selenide.open("/");
+        });
+        String alertActualText =
+        step("Попытка авторизации", () -> {
+            loginForm.doLogin(username, password);
+            String alertActualTextToReturn = Selenide.switchTo().alert().getText();
+            Selenide.confirm();
+            loginForm.getCloseModalButton();
+            return alertActualTextToReturn;
+        });
+        step("Проверки, что авторизации не прошла", () -> {
+            Assertions.assertEquals(alertExpectedText, alertActualText);
+            loginForm.getLoginButtonLocator().shouldBe(Condition.visible);
+            loginForm.getNameOfUserLink().shouldNotBe(Condition.visible);
+        });
     }
 }

@@ -32,7 +32,6 @@ allure {
 }
 
 
-
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.8.1',
             'com.codeborne:selenide:6.13.1',
@@ -40,16 +39,14 @@ dependencies {
             'com.fasterxml.jackson.core:jackson-databind:2.15.1',
             'org.aeonbits.owner:owner:1.0.12',
             'com.github.javafaker:javafaker:1.0.2',
-            'io.qameta.allure:allure-selenide:2.17.3'
-
-
+            'io.qameta.allure:allure-selenide:2.17.3',
+            "org.slf4j:slf4j-simple:2.0.7"
     )
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 tasks.withType(Test) {
     systemProperties(System.getProperties())
-//без этого не будет информация о прогоне теста выводится в консоль
     testLogging {
         lifecycle {
             events "started", "skipped", "failed", "standard_error", "standard_out"
