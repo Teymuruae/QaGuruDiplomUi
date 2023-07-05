@@ -55,7 +55,36 @@ tasks.withType(Test) {
     }
 }
 
-
 test {
     useJUnitPlatform()
+}
+
+task cart_test(type: Test) {
+    useJUnitPlatform{
+        includeTags("cartTest")   //включает тесты по названию тэга, которые надо запустить
+    }
+}
+
+task auth_negative_test(type: Test) {
+    useJUnitPlatform{
+        includeTags("authNegative")   //включает тесты по названию тэга, которые надо запустить
+    }
+}
+
+task auth_positive_test(type: Test) {
+    useJUnitPlatform{
+        includeTags("authPositive")   //включает тесты по названию тэга, которые надо запустить
+    }
+}
+
+task auth_cart_test(type: Test) {
+    useJUnitPlatform{
+        includeTags("authCart")   //включает тесты по названию тэга, которые надо запустить
+    }
+}
+
+task kukush(type: Test) {
+    useJUnitPlatform{
+        includeTags("kuku")   //включает тесты по названию тэга, которые надо запустить
+    }
 }

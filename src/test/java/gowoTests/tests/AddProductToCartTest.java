@@ -8,6 +8,7 @@ import gowoTests.pages.MainPage;
 import gowoTests.pages.ProductPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -30,6 +31,7 @@ public class AddProductToCartTest extends TestBase {
         );
     }
 
+    @Tag("cartTest")
     @DisplayName("Тест на добавление товара в корзину")
     @MethodSource()
     @ParameterizedTest()

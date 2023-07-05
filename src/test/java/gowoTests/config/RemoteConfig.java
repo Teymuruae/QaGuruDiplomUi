@@ -14,4 +14,7 @@ public interface RemoteConfig extends Config {
 
     @Key("remoteUrl")
     String getRemoteUrl();
+
+    @Key("browser")
+    String getBrowser();
 }

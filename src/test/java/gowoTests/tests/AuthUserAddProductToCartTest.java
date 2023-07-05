@@ -6,10 +6,7 @@ import gowoTests.api.ApiHelpMethods;
 import gowoTests.pages.CartPage;
 import gowoTests.pages.MainPage;
 import gowoTests.pages.ProductPage;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
@@ -30,6 +27,7 @@ public class AuthUserAddProductToCartTest extends TestBase {
     }
 
 
+    @Tag("authCart")
     @DisplayName("Тест на сохранение товара в корзине")
     @Test
     void addProductToCartAuthUserTest() {

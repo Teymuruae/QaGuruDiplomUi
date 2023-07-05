@@ -7,6 +7,7 @@ import gowoTests.helpers.faker.FakeData;
 import gowoTests.pages.LoginForm;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,6 +30,7 @@ public class AuthUiNegativeTest extends TestBase {
         );
     }
 
+    @Tag("authNegative")
     @DisplayName("Негативные тесты на авторизацию")
     @MethodSource()
     @ParameterizedTest(name = "name {0}, pass {1}, {2}")
