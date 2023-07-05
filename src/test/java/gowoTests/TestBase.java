@@ -28,14 +28,14 @@ public class TestBase {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = authConfings.getBaseUrl();
         Configuration.browser = remoteConfigs.getBrowser();
-//        Configuration.remote = String.format("https://%s:%s@%s/wd/hub", remoteConfigs.getUser(),remoteConfigs.getPass(),
-//                remoteConfigs.getRemoteUrl());
-//        DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-//                "enableVNC", true,
-//                "enableVideo", true
-//        ));
-//        Configuration.browserCapabilities = capabilities;
+        Configuration.remote = String.format("https://%s:%s@%s/wd/hub", remoteConfigs.getUser(),remoteConfigs.getPass(),
+                remoteConfigs.getRemoteUrl());
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
     }
 
     @BeforeEach
