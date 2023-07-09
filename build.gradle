@@ -40,7 +40,8 @@ dependencies {
             'org.aeonbits.owner:owner:1.0.12',
             'com.github.javafaker:javafaker:1.0.2',
             'io.qameta.allure:allure-selenide:2.17.3',
-            "org.slf4j:slf4j-simple:2.0.7"
+            "org.slf4j:slf4j-simple:2.0.7",
+            'io.qameta.allure:allure-rest-assured:2.20.1'
     )
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }

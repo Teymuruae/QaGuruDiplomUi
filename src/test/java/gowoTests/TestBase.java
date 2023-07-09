@@ -6,9 +6,11 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import gowoTests.attaches.Attaches;
 import gowoTests.config.AuthConfings;
 import gowoTests.config.RemoteConfig;
+import gowoTests.helpers.CustomApiListener;
 import gowoTests.helpers.HelpMethods;
 import gowoTests.helpers.forAuth.Login;
 import io.qameta.allure.selenide.AllureSelenide;
+import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -28,6 +30,7 @@ public class TestBase {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = authConfings.getBaseUrl();
         Configuration.browser = remoteConfigs.getBrowser();
+        RestAssured.filters(CustomApiListener.withCustomTemplates());
         Configuration.remote = String.format("https://%s:%s@%s/wd/hub", remoteConfigs.getUser(),remoteConfigs.getPass(),
                 remoteConfigs.getRemoteUrl());
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -36,6 +39,7 @@ public class TestBase {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
+
     }
 
     @BeforeEach
