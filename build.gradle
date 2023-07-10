@@ -83,9 +83,3 @@ task auth_cart_test(type: Test) {
         includeTags("authCart")   //включает тесты по названию тэга, которые надо запустить
     }
 }
-
-task kukush(type: Test) {
-    useJUnitPlatform{
-        includeTags("kuku")   //включает тесты по названию тэга, которые надо запустить
-    }
-}

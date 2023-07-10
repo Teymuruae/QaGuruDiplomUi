@@ -25,13 +25,16 @@ public class TestBase {
     protected Login login = new Login();
     protected HelpMethods helpMethods = new HelpMethods();
 
+    private static String browser = System.getProperty("browser", "Chrome100");
+
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = authConfings.getBaseUrl();
-        Configuration.browser = remoteConfigs.getBrowser();
+
         RestAssured.filters(CustomApiListener.withCustomTemplates());
-        Configuration.remote = String.format("https://%s:%s@%s/wd/hub", remoteConfigs.getUser(),remoteConfigs.getPass(),
+        switcher(browser);
+        Configuration.remote = String.format("https://%s:%s@%s/wd/hub", remoteConfigs.getUser(), remoteConfigs.getPass(),
                 remoteConfigs.getRemoteUrl());
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -43,15 +46,35 @@ public class TestBase {
     }
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     @AfterEach
-    public void tearDown(){
+    public void tearDown() {
         Attaches.attachScreenshot();
         Attaches.browserConsoleLogs();
         Attaches.addVideo();
         Selenide.closeWebDriver();
+    }
+
+    public static void switcher(String browser1) {
+        switch (browser1) {
+            case "chrome100":
+                Configuration.browser = "Chrome";
+                Configuration.browserVersion = "100.0";
+                break;
+            case "fireFox97":
+                Configuration.browser = "fireFox";
+                Configuration.browserVersion = "97.0";
+                break;
+            case "fireFox98":
+                Configuration.browser = "fireFox";
+                Configuration.browserVersion = "98.0";
+                break;
+            case "chrome99":
+                Configuration.browser = "Chrome";
+                Configuration.browserVersion = "99.0";
+        }
     }
 }
