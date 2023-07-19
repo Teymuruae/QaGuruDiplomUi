@@ -35,8 +35,8 @@ public class TestBase {
 
         RestAssured.filters(CustomApiListener.withCustomTemplates());
         switcher(browser);
-        Configuration.remote = String.format("https://%s:%s@%s/wd/hub", remoteConfigs.getUser(), remoteConfigs.getPass(),
-                remoteConfigs.getRemoteUrl());
+//        Configuration.remote = String.format("https://%s:%s@%s/wd/hub", remoteConfigs.getUser(), remoteConfigs.getPass(),
+//                remoteConfigs.getRemoteUrl());
         Configuration.remote = String.format("http://10.164.68.94:4444/wd/hub");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
