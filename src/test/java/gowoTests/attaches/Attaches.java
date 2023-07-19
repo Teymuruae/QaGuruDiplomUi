@@ -42,8 +42,7 @@ public class Attaches {
 
     //Здесь просто создается ссылка для предыдущего метода
     public static URL getVideoUrl() {
-        String videoUrl = "http://10.164.68.94:4444/video/" + sessionId() + ".mp4";
-//        String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId() + ".mp4";
+        String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId() + ".mp4";
         try {
             return new URL(videoUrl);
         } catch (MalformedURLException e) {
