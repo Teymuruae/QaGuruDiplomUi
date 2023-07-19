@@ -6,7 +6,7 @@ import gowoTests.helpers.HelpMethods;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class LoginForm extends MainPage {
+public class LoginFormPageObject extends MainPage {
     private HelpMethods helpMethods = new HelpMethods();
     private String
             wrongUserALertText = "User does not exist.",

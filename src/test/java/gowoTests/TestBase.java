@@ -26,16 +26,19 @@ public class TestBase {
     protected HelpMethods helpMethods = new HelpMethods();
 
     private static String browser = System.getProperty("browser", "Chrome100");
+    private static String browserSize = System.getProperty("browserSize", "1920x1080");
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
+        Configuration.browserSize = browserSize;
         Configuration.baseUrl = authConfings.getBaseUrl();
 
         RestAssured.filters(CustomApiListener.withCustomTemplates());
         switcher(browser);
         Configuration.remote = String.format("https://%s:%s@%s/wd/hub", remoteConfigs.getUser(), remoteConfigs.getPass(),
                 remoteConfigs.getRemoteUrl());
+        Configuration.remote = String.format("http://10.164.68.94:4444/wd/hub");
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,

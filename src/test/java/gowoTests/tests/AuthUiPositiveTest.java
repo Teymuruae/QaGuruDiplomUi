@@ -3,7 +3,7 @@ package gowoTests.tests;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import gowoTests.TestBase;
-import gowoTests.pages.LoginForm;
+import gowoTests.pages.LoginFormPageObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import static io.qameta.allure.Allure.step;
 
 public class AuthUiPositiveTest extends TestBase {
 
-    private LoginForm loginForm = new LoginForm();
+    private LoginFormPageObject loginForm = new LoginFormPageObject();
 
     @Tag("authPositive")
     @DisplayName("Позитивный тест на авторизацию ui")
