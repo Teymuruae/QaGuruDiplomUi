@@ -65,7 +65,7 @@ public class TestBase {
         switch (browser1) {
             case "chrome100":
                 Configuration.browser = "Chrome";
-                Configuration.browserVersion = "100.0";
+                Configuration.browserVersion = "113.0";
                 break;
             case "fireFox97":
                 Configuration.browser = "fireFox";
@@ -77,7 +77,7 @@ public class TestBase {
                 break;
             case "chrome99":
                 Configuration.browser = "Chrome";
-                Configuration.browserVersion = "99.0";
+                Configuration.browserVersion = "114.0";
         }
     }
 }
