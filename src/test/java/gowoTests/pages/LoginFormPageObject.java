@@ -48,5 +48,4 @@ public class LoginFormPageObject extends MainPage {
                 .fillForm(passwordLocator, password)
                 .clickButton(logInModalButton);
     }
-
 }

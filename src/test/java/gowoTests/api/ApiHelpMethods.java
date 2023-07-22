@@ -3,13 +3,13 @@ package gowoTests.api;
 import gowoTests.api.pojo.requests.AuthRequest;
 import gowoTests.api.pojo.responses.AuthResponse;
 import gowoTests.config.AuthConfings;
+import gowoTests.config.UrlConfings;
 import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.Test;
 
 public class ApiHelpMethods {
-    protected AuthConfings config = ConfigFactory.create(AuthConfings.class, System.getProperties());
+    UrlConfings urlConfings = ConfigFactory.create(UrlConfings.class, System.getProperties());
     protected final String authCookieName = "tokenp_";
 
     /**
@@ -20,7 +20,7 @@ public class ApiHelpMethods {
      * @return
      */
     public String authWithApi(String token) {
-        Spec.install(config.getApiAuthUrl(), HttpStatus.SC_OK);
+        Spec.install(urlConfings.getApiAuthUrl(), HttpStatus.SC_OK);
         AuthRequest body = new AuthRequest(token);
         AuthResponse response =
                 RestAssured
@@ -31,11 +31,5 @@ public class ApiHelpMethods {
                         .then().log().all()
                         .extract().as(AuthResponse.class);
         return response.getItem().getToken();
-    }
-
-    @Test
-    void test() {
-        String s = authWithApi(config.getToken());
-        System.out.println(s);
     }
 }

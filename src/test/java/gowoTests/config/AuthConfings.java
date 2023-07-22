@@ -8,10 +8,6 @@ import org.aeonbits.owner.Config;
 public interface AuthConfings extends Config {
     @Key("token")
     String getToken();
-    @Key("apiAuthUrl")
-    String getApiAuthUrl();
-    @Key("baseUrl")
-    String getBaseUrl();
 
     @Key("username")
     String getUsername();

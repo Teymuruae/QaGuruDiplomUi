@@ -26,7 +26,6 @@ public class AuthUserAddProductToCartTest extends TestBase {
         Assertions.assertEquals(0, cartPage.getProductsTitle().texts().size());
     }
 
-
     @Tag("authCart")
     @DisplayName("Тест на сохранение товара в корзине")
     @Test

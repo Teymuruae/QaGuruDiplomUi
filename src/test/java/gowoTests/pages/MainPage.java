@@ -18,7 +18,6 @@ public class MainPage {
             monitorsButtonLocator = $("[onclick=\"byCat('monitor')\"]"),
             cartButtonLocator = $x("//a[text() = 'Cart']");
 
-
     private ElementsCollection
             products = $$("#tbodyid a[class]");
 

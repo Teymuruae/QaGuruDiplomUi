@@ -1,6 +1,6 @@
 package gowoTests.api;
 
-import gowoTests.config.AuthConfings;
+import gowoTests.config.UrlConfings;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -9,13 +9,12 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.aeonbits.owner.ConfigFactory;
 
-
 public class Spec {
-    private static AuthConfings config = ConfigFactory.create(AuthConfings.class, System.getProperties());
+    protected static UrlConfings urlConfings = ConfigFactory.create(UrlConfings.class, System.getProperties());
 
     private static RequestSpecification request(String path) {
         return new RequestSpecBuilder()
-                .setBaseUri(config.getApiAuthUrl())
+                .setBaseUri(urlConfings.getApiAuthUrl())
                 .setContentType(ContentType.JSON)
                 .build();
     }

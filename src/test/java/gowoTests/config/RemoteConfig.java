@@ -1,8 +1,9 @@
 package gowoTests.config;
 
 import org.aeonbits.owner.Config;
+
 @Config.Sources({
-        "classpath:remote.properties"
+        "classpath:remoteauth.properties"
 })
 public interface RemoteConfig extends Config {
 
@@ -11,7 +12,4 @@ public interface RemoteConfig extends Config {
 
     @Key("remotePass")
     String getPass();
-
-    @Key("remoteUrl")
-    String getRemoteUrl();
 }

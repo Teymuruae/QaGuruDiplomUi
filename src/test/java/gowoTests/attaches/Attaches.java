@@ -2,7 +2,10 @@ package gowoTests.attaches;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import gowoTests.config.RemoteConfig;
+import gowoTests.config.UrlConfings;
 import io.qameta.allure.Attachment;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -11,7 +14,11 @@ import java.net.URL;
 
 import static com.codeborne.selenide.Selenide.sessionId;
 import static org.openqa.selenium.logging.LogType.BROWSER;
+
 public class Attaches {
+    private static RemoteConfig remoteConfigs = ConfigFactory.create(RemoteConfig.class, System.getProperties());
+
+    private static UrlConfings urlConfings = ConfigFactory.create(UrlConfings.class, System.getProperties());
 
     @Attachment(value = "Мой любимый скриншот", type = "image/png", fileExtension = "png")
     public static byte[] attachScreenshot() {
@@ -23,6 +30,7 @@ public class Attaches {
     public static String attachAsText(String attachName, String message) {
         return message;
     }
+
     //этот метод прикладываем в тесты (то есть в AfterEach) НЕ РАБОТАЕТ С FIREFOX
     public static void browserConsoleLogs() {
         attachAsText(
@@ -39,10 +47,9 @@ public class Attaches {
                 + "' type='video/mp4'></video></body></html>";
     }
 
-
     //Здесь просто создается ссылка для предыдущего метода
     public static URL getVideoUrl() {
-        String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId() + ".mp4";
+        String videoUrl = String.format("https://%s/video/%s.mp4", urlConfings.getRemoteUrl(), sessionId().toString());
         try {
             return new URL(videoUrl);
         } catch (MalformedURLException e) {

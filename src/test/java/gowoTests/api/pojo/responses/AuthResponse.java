@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AuthResponse {
 
-            @JsonProperty("Item")
+    @JsonProperty("Item")
     private Item item;
 
     public AuthResponse(Item item) {

@@ -11,7 +11,6 @@ public class CartPage {
             productsTitle = $$x("//tbody//td[2]"),
             deleteButton = $$x("//a[text() = 'Delete']");
 
-
     public ElementsCollection getProductsTitle() {
         return productsTitle;
     }

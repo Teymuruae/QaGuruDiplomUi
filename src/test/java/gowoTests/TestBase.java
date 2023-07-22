@@ -6,6 +6,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import gowoTests.attaches.Attaches;
 import gowoTests.config.AuthConfings;
 import gowoTests.config.RemoteConfig;
+import gowoTests.config.UrlConfings;
 import gowoTests.helpers.CustomApiListener;
 import gowoTests.helpers.HelpMethods;
 import gowoTests.helpers.forAuth.Login;
@@ -22,28 +23,27 @@ import java.util.Map;
 public class TestBase {
     protected static AuthConfings authConfings = ConfigFactory.create(AuthConfings.class, System.getProperties());
     protected static RemoteConfig remoteConfigs = ConfigFactory.create(RemoteConfig.class, System.getProperties());
+    protected static UrlConfings urlConfings = ConfigFactory.create(UrlConfings.class, System.getProperties());
     protected Login login = new Login();
     protected HelpMethods helpMethods = new HelpMethods();
-
     private static String browser = System.getProperty("browser", "Chrome100");
     private static String browserSize = System.getProperty("browserSize", "1920x1080");
 
     @BeforeAll
     static void beforeAll() {
         Configuration.browserSize = browserSize;
-        Configuration.baseUrl = authConfings.getBaseUrl();
+        Configuration.baseUrl = urlConfings.getBaseUrl();
 
         RestAssured.filters(CustomApiListener.withCustomTemplates());
         switcher(browser);
         Configuration.remote = String.format("https://%s:%s@%s/wd/hub", remoteConfigs.getUser(), remoteConfigs.getPass(),
-                remoteConfigs.getRemoteUrl());
+                urlConfings.getRemoteUrl());
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-
     }
 
     @BeforeEach
