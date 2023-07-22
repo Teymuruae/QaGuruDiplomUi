@@ -5,3 +5,7 @@ gradlew.bat
 gradlew
 build
 gradle
+src/test/resources/auth.properties
+src/test/resources/remoteauth.properties
+notifications/config.json
+notifications/draft.txt

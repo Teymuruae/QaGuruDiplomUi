@@ -4,7 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import gowoTests.TestBase;
 import gowoTests.helpers.faker.FakeData;
-import gowoTests.pages.LoginFormPageObject;
+import gowoTests.pages.conponents.LoginForm;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -18,7 +18,7 @@ import static io.qameta.allure.Allure.step;
 
 public class AuthUiNegativeTest extends TestBase {
 
-    private static LoginFormPageObject loginForm = new LoginFormPageObject();
+    private static LoginForm loginForm = new LoginForm();
 
     static Stream<Arguments> authNegativeTest() {
         return Stream.of(
