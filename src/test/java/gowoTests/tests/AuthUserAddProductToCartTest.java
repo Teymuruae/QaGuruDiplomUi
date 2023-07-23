@@ -2,7 +2,6 @@ package gowoTests.tests;
 
 import com.codeborne.selenide.Selenide;
 import gowoTests.TestBase;
-import gowoTests.api.ApiHelpMethods;
 import gowoTests.pages.CartPage;
 import gowoTests.pages.MainPage;
 import gowoTests.pages.ProductPage;
@@ -16,10 +15,9 @@ public class AuthUserAddProductToCartTest extends TestBase {
     private MainPage mainPage = new MainPage();
     private ProductPage productPage = new ProductPage();
     private CartPage cartPage = new CartPage();
-    private ApiHelpMethods apiHelpMethods = new ApiHelpMethods();
 
     @AfterEach
-    void after(){
+    void after() {
         helpMethods
                 .clickButton(mainPage.getCartButtonLocator());
         cartPage.deleteProducts();
@@ -40,13 +38,13 @@ public class AuthUserAddProductToCartTest extends TestBase {
             Selenide.sleep(1000);
         });
         String chosenProduct =
-        step("Добавление товара в корзину", () -> {
-            String chosenProductToReturn = mainPage.clickProduct();
-            helpMethods
-                    .clickButton(productPage.getAddToCartButtonLocator());
-            Selenide.confirm();
-            return chosenProductToReturn;
-        });
+                step("Добавление товара в корзину", () -> {
+                    String chosenProductToReturn = mainPage.clickProduct();
+                    helpMethods
+                            .clickButton(productPage.getAddToCartButtonLocator());
+                    Selenide.confirm();
+                    return chosenProductToReturn;
+                });
         step("Вторая авторизации с помощью апи", () -> {
             Selenide.closeWebDriver();
             login.doLoginInUiUsingApi(authConfings.getToken());

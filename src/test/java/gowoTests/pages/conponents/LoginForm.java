@@ -10,9 +10,9 @@ import static com.codeborne.selenide.Selenide.$x;
 public class LoginForm extends MainPage {
     private HelpMethods helpMethods = new HelpMethods();
     private String
-            wrongUserALertText = "User does not exist.",
+            wrongUserAlertText = "User does not exist.",
             emptyFieldAlertText = "Please fill out Username and Password.",
-            wrongPasswordAletText = "Wrong password.";
+            wrongPasswordAlertText = "Wrong password.";
 
     SelenideElement
             usernameLocator = $("#loginusername"),
@@ -20,16 +20,16 @@ public class LoginForm extends MainPage {
             logInModalButton = $("[onclick = 'logIn()']"),
             closeModalButton = $x("//button[@onclick= 'logIn()']//..//button[text() = 'Close']");
 
-    public String getWrongUserALertText() {
-        return wrongUserALertText;
+    public String getWrongUserAlertText() {
+        return wrongUserAlertText;
     }
 
     public String getEmptyFieldAlertText() {
         return emptyFieldAlertText;
     }
 
-    public String getWrongPasswordAletText() {
-        return wrongPasswordAletText;
+    public String getWrongPasswordAlertText() {
+        return wrongPasswordAlertText;
     }
 
     public SelenideElement getCloseModalButton() {

@@ -2,7 +2,6 @@ package gowoTests.api;
 
 import gowoTests.api.pojo.requests.AuthRequest;
 import gowoTests.api.pojo.responses.AuthResponse;
-import gowoTests.config.AuthConfings;
 import gowoTests.config.UrlConfings;
 import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;

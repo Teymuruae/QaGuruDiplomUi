@@ -15,10 +15,6 @@ public class CartPage {
         return productsTitle;
     }
 
-    public ElementsCollection getDeleteButton() {
-        return deleteButton;
-    }
-
     public void deleteProducts() {
         for (int i = deleteButton.size(); i > 0; i--) {
             deleteButton.get(i - 1).click();

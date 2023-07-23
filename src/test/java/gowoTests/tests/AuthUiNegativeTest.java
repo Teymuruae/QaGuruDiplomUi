@@ -19,12 +19,13 @@ import static io.qameta.allure.Allure.step;
 public class AuthUiNegativeTest extends TestBase {
 
     private static LoginForm loginForm = new LoginForm();
+    private static FakeData fakeData = new FakeData();
 
     static Stream<Arguments> authNegativeTest() {
         return Stream.of(
-                Arguments.of(FakeData.fakeUser, FakeData.fakePassword, loginForm.getWrongUserALertText()),
-                Arguments.of(authConfings.getUsername(), FakeData.fakePassword, loginForm.getWrongPasswordAletText()),
-                Arguments.of("", FakeData.fakePassword, loginForm.getEmptyFieldAlertText()),
+                Arguments.of(fakeData.fakeUser, fakeData.fakePassword, loginForm.getWrongUserAlertText()),
+                Arguments.of(authConfings.getUsername(), fakeData.fakePassword, loginForm.getWrongPasswordAlertText()),
+                Arguments.of("", fakeData.fakePassword, loginForm.getEmptyFieldAlertText()),
                 Arguments.of(authConfings.getUsername(), "", loginForm.getEmptyFieldAlertText()),
                 Arguments.of("", "", loginForm.getEmptyFieldAlertText())
         );
@@ -39,13 +40,13 @@ public class AuthUiNegativeTest extends TestBase {
             Selenide.open("/");
         });
         String alertActualText =
-        step("Попытка авторизации", () -> {
-            loginForm.doLogin(username, password);
-            String alertActualTextToReturn = Selenide.switchTo().alert().getText();
-            Selenide.confirm();
-            loginForm.getCloseModalButton();
-            return alertActualTextToReturn;
-        });
+                step("Попытка авторизации", () -> {
+                    loginForm.doLogin(username, password);
+                    String alertActualTextToReturn = Selenide.switchTo().alert().getText();
+                    Selenide.confirm();
+                    loginForm.getCloseModalButton();
+                    return alertActualTextToReturn;
+                });
         step("Проверки, что авторизации не прошла", () -> {
             Assertions.assertEquals(alertExpectedText, alertActualText);
             loginForm.getLoginButtonLocator().shouldBe(Condition.visible);

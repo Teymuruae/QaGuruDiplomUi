@@ -35,7 +35,7 @@ public class TestBase {
         Configuration.baseUrl = urlConfings.getBaseUrl();
 
         RestAssured.filters(CustomApiListener.withCustomTemplates());
-        switcher(browser);
+        setBrowserAndVersion(browser);
         Configuration.remote = String.format("https://%s:%s@%s/wd/hub", remoteConfigs.getUser(), remoteConfigs.getPass(),
                 urlConfings.getRemoteUrl());
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -59,7 +59,7 @@ public class TestBase {
         Selenide.closeWebDriver();
     }
 
-    public static void switcher(String browser1) {
+    public static void setBrowserAndVersion(String browser1) {
         switch (browser1) {
             case "chrome100":
                 Configuration.browser = "Chrome";
